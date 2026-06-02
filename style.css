@@ -1,0 +1,406 @@
+/* ===== Minecraft Style - Full Redesign ===== */
+@font-face {
+  font-family: 'Minecraft';
+  src: url('fonts/1_Minecraft-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Minecraft';
+  src: url('fonts/1_Minecraft-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Minecraft', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #727273 #1e1e1f;
+}
+
+body {
+  background-color: #2b2b2b;
+  color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1e1f;
+  border: 2px solid #3c3d3e;
+  box-shadow: inset 0 0 0 2px #1a1a1b;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #727273;
+  border: 3px solid #929293;
+  box-shadow: 0 0 0 3px #1a1a1b, inset 0 0 0 1px #48494a;
+  min-height: 40px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #929293;
+  border-color: #b4b5b7;
+}
+::-webkit-scrollbar-corner {
+  background-color: #1e1e1f;
+}
+
+/* ===== Variables ===== */
+:root {
+  --border-thickness: 3px;
+  --border-2x-thickness: calc(2 * var(--border-thickness));
+  --bg-dark: #2b2b2b;
+  --card-bg: #48494a;
+  --text-light: #f0f0f0;
+  --text-muted: #b0b0b0;
+  --accent: #5769CC;
+  --button-bg: #3c8527;
+  --button-hover: #2a641c;
+  --border-color: #727273;
+  --shadow-dark: #1a1a1b;
+}
+
+/* Dark mode overrides */
+body.dark-mode {
+  --bg-dark: #1e1e1f;
+  --card-bg: #313233;
+  --text-light: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --accent: #AE8AC1;
+  --button-bg: #AE8AC1;
+  --button-hover: #331C73;
+}
+
+/* ===== Container ===== */
+.container {
+  width: 90%;
+  max-width: 800px;
+  background-color: var(--card-bg);
+  border: var(--border-thickness) solid var(--border-color);
+  box-shadow: 0px var(--border-2x-thickness) 0px #4d4d4e,
+              0 0 0 var(--border-thickness) var(--shadow-dark),
+              0 var(--border-2x-thickness) 0 var(--border-thickness) var(--shadow-dark);
+  padding: 40px;
+  transition: background 0.3s;
+}
+
+/* ===== Header ===== */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #c0c0c0, #e0e0e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  text-shadow: 2px 2px 0 #1a1a1b;
+}
+
+.header p {
+  color: var(--text-muted);
+}
+
+.title-img {
+  width: 80%;
+  display: block;
+  margin: 0 auto 20px;
+}
+.title-dark { display: none; }
+body.dark-mode .title-light { display: none; }
+body.dark-mode .title-dark { display: block; }
+
+/* ===== Inputs ===== */
+.input-field, .mic-selector, .ptt-key-input {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #313233;
+  border: var(--border-thickness) solid #1e1e1f;
+  box-shadow: 0px var(--border-2x-thickness) 0px #1e1e1f inset;
+  color: white;
+  font-size: 16px;
+  border-radius: 0;
+  outline: none;
+}
+.input-field:focus, .mic-selector:focus, .ptt-key-input:focus {
+  border-color: var(--accent);
+}
+
+/* ===== Buttons (Minecraft style) ===== */
+.primary-btn, .control-btn, .ptt-key-button, #darkModeToggle {
+  display: inline-block;
+  font-size: 18px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+  min-width: 160px;
+  border: var(--border-thickness) solid #639d52;
+  background-color: var(--button-bg);
+  box-shadow: 0px var(--border-2x-thickness) 0px #1d4d13,
+              0 0 0 var(--border-thickness) #1a1a1b,
+              0 var(--border-2x-thickness) 0 var(--border-thickness) #1a1a1b;
+  border-radius: 0;
+}
+.primary-btn:hover, .control-btn:hover, .ptt-key-button:hover, #darkModeToggle:hover {
+  background-color: var(--button-hover);
+  border-color: #7fa277;
+}
+.primary-btn:active, .control-btn:active, .ptt-key-button:active, #darkModeToggle:active {
+  box-shadow: 0 0 0 var(--border-thickness) #1a1a1b;
+  transform: translateY(var(--border-2x-thickness));
+}
+
+.control-btn.exit {
+  background-color: #c83737;
+  border-color: #d16161;
+  box-shadow: 0px var(--border-2x-thickness) 0px #781e1e,
+              0 0 0 var(--border-thickness) #1a1a1b,
+              0 var(--border-2x-thickness) 0 var(--border-thickness) #1a1a1b;
+}
+.control-btn.exit:hover { background-color: #a32929; border-color: #f58f8f; }
+
+/* ===== Cards / Sections ===== */
+.mic-selector-container, .volume-control, .participants-section, 
+#gameStatus, .ptt-container {
+  background-color: rgba(0,0,0,0.3);
+  border: var(--border-thickness) solid var(--border-color);
+  box-shadow: 0px var(--border-2x-thickness) 0px #4d4d4e,
+              0 0 0 var(--border-thickness) #1a1a1b;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* ===== Slider ===== */
+.slider {
+  flex: 1;
+  height: 6px;
+  background: #1e1e1f;
+  border: 1px solid #3c3d3e;
+}
+.slider::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border: 2px solid #fff;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+/* ===== Participants ===== */
+.participant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #313233;
+  border: var(--border-thickness) solid #1e1e1f;
+  box-shadow: 0px 2px 0px #1e1e1f inset;
+  margin-bottom: 8px;
+}
+.participant-skin {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  background: #00000033;
+}
+.participant-name {
+  color: var(--text-light);
+  flex: 1;
+}
+
+/* ===== PTT Indicator ===== */
+.ptt-active-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--button-bg);
+  color: white;
+  padding: 12px 20px;
+  border: var(--border-thickness) solid #639d52;
+  box-shadow: 0px var(--border-2x-thickness) 0px #1d4d13,
+              0 0 0 var(--border-thickness) #1a1a1b;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+/* ===== Dark Mode Toggle ===== */
+#darkModeToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  min-width: auto;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  body { padding: 10px; }
+  .container { padding: 20px; width: 100%; }
+  .controls-row { flex-direction: column; gap: 10px; }
+  .primary-btn, .control-btn { width: 100%; }
+}
+/* ===== Screen 1: Save Button ===== */
+.save-btn {
+  width: 100%;
+  margin-top: 8px;
+  background-color: #3a6fa8;
+  border-color: #5a9fd4;
+  box-shadow: 0px var(--border-2x-thickness) 0px #1d3f5e,
+              0 0 0 var(--border-thickness) #1a1a1b,
+              0 var(--border-2x-thickness) 0 var(--border-thickness) #1a1a1b;
+}
+.save-btn:hover {
+  background-color: #2a5280;
+  border-color: #78b4e0;
+}
+.save-btn:active {
+  box-shadow: 0 0 0 var(--border-thickness) #1a1a1b;
+  transform: translateY(var(--border-2x-thickness));
+}
+body.dark-mode .save-btn {
+  background-color: var(--accent);
+  border-color: #c9aadb;
+  box-shadow: 0px var(--border-2x-thickness) 0px #331C73,
+              0 0 0 var(--border-thickness) #1a1a1b,
+              0 var(--border-2x-thickness) 0 var(--border-thickness) #1a1a1b;
+}
+
+/* ===== Screen 2: Saved Profile Card ===== */
+.saved-profile-card {
+  background-color: rgba(0,0,0,0.3);
+  border: var(--border-thickness) solid var(--border-color);
+  box-shadow: 0px var(--border-2x-thickness) 0px #4d4d4e,
+              0 0 0 var(--border-thickness) #1a1a1b;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.saved-profile-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.saved-profile-row:last-child {
+  margin-bottom: 0;
+}
+.saved-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  min-width: 130px;
+  flex-shrink: 0;
+}
+.saved-value {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+.saved-url {
+  color: #7eb8f7;
+  font-size: 0.78rem;
+}
+
+/* ===== Screen 2: Ready Actions ===== */
+.ready-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.join-btn {
+  flex: 1;
+}
+.secondary-btn {
+  display: inline-block;
+  font-size: 16px;
+  color: var(--text-light);
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+  min-width: 120px;
+  border: var(--border-thickness) solid #727273;
+  background-color: #4a4b4c;
+  box-shadow: 0px var(--border-2x-thickness) 0px #2a2b2c,
+              0 0 0 var(--border-thickness) #1a1a1b,
+              0 var(--border-2x-thickness) 0 var(--border-thickness) #1a1a1b;
+  border-radius: 0;
+  font-family: 'Minecraft', Arial, sans-serif;
+}
+.secondary-btn:hover {
+  background-color: #5a5b5c;
+  border-color: #929393;
+}
+.secondary-btn:active {
+  box-shadow: 0 0 0 var(--border-thickness) #1a1a1b;
+  transform: translateY(var(--border-2x-thickness));
+}
+
+/* ===== Section spacing ===== */
+.section {
+  margin-bottom: 20px;
+}
+.section label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ===== Responsive updates ===== */
+@media (max-width: 768px) {
+  .ready-actions {
+    flex-direction: column;
+  }
+  .secondary-btn {
+    width: 100%;
+  }
+}
+
+
+/* ===== Layout Fix ===== */
+#callControls{
+    display:grid;
+    grid-template-columns:220px 220px 1fr 220px;
+    gap:16px;
+    align-items:stretch;
+}
+
+.status-panel{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.mic-selector-container,
+.participants-section,
+#gameStatus,
+.ptt-container,
+.status-panel{
+    margin:0;
+    height:100%;
+}
+
+.participants-section h3{
+    margin-bottom:12px;
+}
+
+@media (max-width: 900px){
+    #callControls{
+        grid-template-columns:1fr;
+    }
+}
